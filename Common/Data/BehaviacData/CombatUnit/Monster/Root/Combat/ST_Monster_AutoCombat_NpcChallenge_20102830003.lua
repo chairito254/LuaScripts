@@ -1,0 +1,4160 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Common\\Data\\BehaviacData\\CombatUnit\\Monster\\Root\\Combat\\ST_Monster_AutoCombat_NpcChallenge_20102830003.lua
+
+local BaseEnum = require("Common.Data.BehaviacData.BaseEnum.BaseEnum")
+local Enums = require("Common.AI.Behaviac.Enums")
+local ST_Monster_AutoCombat_NpcChallenge_20102830003 = {
+	behavior = {
+		useForRoute = false,
+		name = "CombatUnit/Monster/Root/Combat/ST_Monster_AutoCombat_NpcChallenge_20102830003",
+		agenttype = "PetAgent",
+		version = 342,
+		properties = {},
+		pars = {
+			{
+				name = "tShow50PCBubble",
+				const = false,
+				type = "bool",
+				value = "false"
+			},
+			{
+				name = "tShow20PCBubble",
+				const = false,
+				type = "bool",
+				value = "false"
+			},
+			{
+				name = "CurrentDistToTarget",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "CurrentEP",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "CurrentHpPercent",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "Weight_JumpBack",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "Weight_RunBack",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "Weight_Skill",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "Weight_CommonAttack",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "Weight_NothingToDo",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "maxSkillDist",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "skillStopDist",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "goBackDist",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "tNewTargetForCatchMode",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "CurrentBoxDistToTarget",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "tAngryPrepare",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "tDrowningDepth",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "tFlyHeight",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "tVerticalDistToTgt",
+				const = 0,
+				type = "float",
+				value = "0"
+			},
+			{
+				name = "tSkillPlan",
+				const = "0",
+				type = "string",
+				value = "0"
+			},
+			{
+				name = "tSkillUsed",
+				const = 0,
+				type = "int",
+				value = "0"
+			},
+			{
+				name = "tCurrentTactics",
+				const = "0",
+				type = "string",
+				value = "0"
+			},
+			{
+				name = "Skillcd",
+				const = 0,
+				type = "float",
+				value = "0"
+			}
+		},
+		attachments = {},
+		node = {
+			id = "569",
+			class = "Sequence",
+			properties = {},
+			attachments = {},
+			children = {
+				{
+					node = {
+						id = "687",
+						class = "Compute",
+						properties = {
+							{
+								Operator = "Mul"
+							},
+							{
+								Opl = {
+									field = "tDrowningDepth"
+								}
+							},
+							{
+								Opr1 = {
+									func = "getBodyHeight",
+									params = {
+										{
+											field = "selfId"
+										}
+									}
+								}
+							},
+							{
+								Opr2 = {
+									const = -0.6
+								}
+							}
+						},
+						attachments = {},
+						children = {}
+					}
+				},
+				{
+					node = {
+						id = "686",
+						class = "Assignment",
+						properties = {
+							{
+								CastRight = "false"
+							},
+							{
+								Opl = {
+									field = "tAngryPrepare"
+								}
+							},
+							{
+								Opr = {
+									const = 0
+								}
+							}
+						},
+						attachments = {},
+						children = {}
+					}
+				},
+				{
+					node = {
+						id = "1405",
+						class = "Action",
+						properties = {
+							{
+								Method = {
+									func = "startTimer",
+									params = {
+										{
+											const = "Skillcd"
+										}
+									}
+								}
+							},
+							{
+								ResultOption = "BT_INVALID"
+							},
+							{
+								ResultResumeOption = "BT_None"
+							}
+						},
+						attachments = {},
+						children = {}
+					}
+				},
+				{
+					node = {
+						id = "570",
+						class = "DecoratorLoop",
+						properties = {
+							{
+								Count = {
+									const = -1
+								}
+							},
+							{
+								DecorateWhenChildEnds = "true"
+							},
+							{
+								DoneWithinFrame = "false"
+							}
+						},
+						attachments = {},
+						children = {
+							{
+								node = {
+									id = "10",
+									class = "Parallel",
+									properties = {
+										{
+											ChildFinishPolicy = "CHILDFINISH_LOOP"
+										},
+										{
+											ExitPolicy = "EXIT_ABORT_RUNNINGSIBLINGS"
+										},
+										{
+											FailurePolicy = "FAIL_ON_ONE"
+										},
+										{
+											SuccessPolicy = "SUCCEED_ON_ALL"
+										}
+									},
+									attachments = {},
+									children = {
+										{
+											node = {
+												id = "464",
+												class = "Sequence",
+												properties = {},
+												attachments = {},
+												children = {
+													{
+														node = {
+															id = "117",
+															class = "Sequence",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "1398",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "tgt"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getTarget"
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "116",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "CurrentDistToTarget"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getDistByTgt",
+																					params = {
+																						{
+																							field = "tgt"
+																						},
+																						{
+																							const = false
+																						},
+																						{
+																							const = true
+																						},
+																						{
+																							const = 0
+																						}
+																					}
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "550",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "CurrentBoxDistToTarget"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getDistByTgt",
+																					params = {
+																						{
+																							field = "tgt"
+																						},
+																						{
+																							const = false
+																						},
+																						{
+																							const = false
+																						},
+																						{
+																							const = 0
+																						}
+																					}
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "121",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "CurrentHpPercent"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getHpPercent",
+																					params = {
+																						{
+																							field = "selfId"
+																						}
+																					}
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "118",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "CurrentEP"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getEp",
+																					params = {
+																						{
+																							field = "selfId"
+																						}
+																					}
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "229",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "skillId"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "252",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "Weight_JumpBack"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "249",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "Weight_RunBack"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "250",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "Weight_Skill"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "251",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "Weight_CommonAttack"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "458",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "Weight_NothingToDo"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "1123",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "tSkillUsed"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "1366",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "false"
+																			},
+																			{
+																				Opl = {
+																					field = "tCurrentTactics"
+																				}
+																			},
+																			{
+																				Opr = {
+																					func = "getMasterCombatTactic"
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																}
+															}
+														}
+													},
+													{
+														node = {
+															id = "6",
+															class = "Selector",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "624",
+																		class = "Sequence",
+																		properties = {},
+																		attachments = {},
+																		children = {
+																			{
+																				node = {
+																					id = "623",
+																					class = "Condition",
+																					properties = {
+																						{
+																							Operator = "Equal"
+																						},
+																						{
+																							Opl = {
+																								func = "checkTargetBlocked",
+																								params = {
+																									{
+																										field = "selfId"
+																									},
+																									{
+																										field = "tgt"
+																									}
+																								}
+																							}
+																						},
+																						{
+																							Opr = {
+																								const = true
+																							}
+																						}
+																					},
+																					attachments = {},
+																					children = {}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "640",
+																					class = "IfElse",
+																					properties = {},
+																					attachments = {},
+																					children = {
+																						{
+																							node = {
+																								id = "641",
+																								class = "And",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "635",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "GreaterEqual"
+																												},
+																												{
+																													Opl = {
+																														func = "getVerticalDis",
+																														params = {
+																															{
+																																field = "selfId"
+																															},
+																															{
+																																field = "tgt"
+																															}
+																														}
+																													}
+																												},
+																												{
+																													Opr = {
+																														const = 0.5
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "642",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "LessEqual"
+																												},
+																												{
+																													Opl = {
+																														func = "getVerticalDis",
+																														params = {
+																															{
+																																field = "selfId"
+																															},
+																															{
+																																field = "tgt"
+																															}
+																														}
+																													}
+																												},
+																												{
+																													Opr = {
+																														const = 4
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "638",
+																								class = "Sequence",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "649",
+																											class = "Action",
+																											properties = {
+																												{
+																													Method = {
+																														func = "moveToTarget",
+																														params = {
+																															{
+																																field = "tgt"
+																															},
+																															{
+																																const = 1
+																															},
+																															{
+																																const = 5
+																															},
+																															{
+																																const = false
+																															},
+																															{
+																																const = false
+																															},
+																															{
+																																const = true
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = BaseEnum.MoveUpdateLevel.Slow
+																															},
+																															{
+																																const = BaseEnum.PathFindType.Voxel
+																															},
+																															{
+																																const = BaseEnum.SpeedRateType.Mid
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = false
+																															}
+																														}
+																													}
+																												},
+																												{
+																													ResultOption = "BT_SUCCESS"
+																												},
+																												{
+																													ResultResumeOption = "BT_ResumeSelf"
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "648",
+																											class = "Action",
+																											properties = {
+																												{
+																													Method = {
+																														func = "playJumpAction",
+																														params = {
+																															{
+																																const = "Jump"
+																															},
+																															{
+																																const = 5
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = 3
+																															},
+																															{
+																																const = BaseEnum.RootMotionSyncPointEnum.AICustomPoint1
+																															}
+																														}
+																													}
+																												},
+																												{
+																													ResultOption = "BT_INVALID"
+																												},
+																												{
+																													ResultResumeOption = "BT_ResumeSelf"
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "689",
+																								class = "Sequence",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "690",
+																											class = "Assignment",
+																											properties = {
+																												{
+																													CastRight = "false"
+																												},
+																												{
+																													Opl = {
+																														field = "tVerticalDistToTgt"
+																													}
+																												},
+																												{
+																													Opr = {
+																														func = "getVerticalDis",
+																														params = {
+																															{
+																																field = "tgt"
+																															},
+																															{
+																																field = "selfId"
+																															}
+																														}
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "645",
+																											class = "IfElse",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "653",
+																														class = "And",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "636",
+																																	class = "Condition",
+																																	properties = {
+																																		{
+																																			Operator = "GreaterEqual"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "tVerticalDistToTgt"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 0.25
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "678",
+																																	class = "Condition",
+																																	properties = {
+																																		{
+																																			Operator = "LessEqual"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "tVerticalDistToTgt"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 3
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															}
+																														}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "679",
+																														class = "IfElse",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "652",
+																																	class = "Condition",
+																																	properties = {
+																																		{
+																																			Operator = "Equal"
+																																		},
+																																		{
+																																			Opl = {
+																																				func = "checkCanFly"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = true
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "661",
+																																	class = "Sequence",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "691",
+																																				class = "Compute",
+																																				properties = {
+																																					{
+																																						Operator = "Add"
+																																					},
+																																					{
+																																						Opl = {
+																																							field = "tFlyHeight"
+																																						}
+																																					},
+																																					{
+																																						Opr1 = {
+																																							field = "tVerticalDistToTgt"
+																																						}
+																																					},
+																																					{
+																																						Opr2 = {
+																																							const = 1.5
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "659",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "switchToFly",
+																																							params = {
+																																								{
+																																									field = "tFlyHeight"
+																																								},
+																																								{
+																																									const = 5
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "658",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "moveToTarget",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "minAttackDist"
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = BaseEnum.MoveUpdateLevel.Slow
+																																								},
+																																								{
+																																									const = BaseEnum.PathFindType.AirNav
+																																								},
+																																								{
+																																									const = BaseEnum.SpeedRateType.Mid
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = false
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_SUCCESS"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeTree"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "660",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "switchToState",
+																																							params = {
+																																								{
+																																									const = "LOCOMOTION"
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = ""
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "680",
+																																	class = "Sequence",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "682",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "moveToTarget",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									const = 1
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = BaseEnum.MoveUpdateLevel.Slow
+																																								},
+																																								{
+																																									const = BaseEnum.PathFindType.Voxel
+																																								},
+																																								{
+																																									const = BaseEnum.SpeedRateType.Mid
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = false
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_SUCCESS"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "681",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "playJumpAction",
+																																							params = {
+																																								{
+																																									const = "Jump"
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = 3
+																																								},
+																																								{
+																																									const = BaseEnum.RootMotionSyncPointEnum.AICustomPoint1
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "664",
+																														class = "Selector",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "627",
+																																	class = "Sequence",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "677",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "calcQualifiedPosByTarget",
+																																							params = {
+																																								{
+																																									field = "selfId"
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									field = "CurrentBoxDistToTarget"
+																																								},
+																																								{
+																																									const = BaseEnum.CalcQualifiedPosQueryType.EightCompassDirections
+																																								},
+																																								{
+																																									const = 4
+																																								},
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = true
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "628",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "moveToQualifiedPos",
+																																							params = {
+																																								{
+																																									field = "selfId"
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = BaseEnum.SpeedRateType.Mid
+																																								},
+																																								{
+																																									const = true
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "665",
+																																	class = "IfElse",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "663",
+																																				class = "Condition",
+																																				properties = {
+																																					{
+																																						Operator = "Equal"
+																																					},
+																																					{
+																																						Opl = {
+																																							func = "checkCanMoveToTarget",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "attackStopBoxDist"
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						Opr = {
+																																							const = true
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "669",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "moveToTarget",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									const = 0.5
+																																								},
+																																								{
+																																									const = 5
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = BaseEnum.MoveUpdateLevel.Normal
+																																								},
+																																								{
+																																									const = BaseEnum.PathFindType.Voxel
+																																								},
+																																								{
+																																									const = BaseEnum.SpeedRateType.Mid
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = false
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_SUCCESS"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeTree"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "671",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "sideWalk",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									const = 1.5
+																																								},
+																																								{
+																																									const = -35
+																																								},
+																																								{
+																																									const = -1
+																																								},
+																																								{
+																																									const = true
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_SUCCESS"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																},
+																{
+																	node = {
+																		id = "1410",
+																		class = "Selector",
+																		properties = {},
+																		attachments = {},
+																		children = {
+																			{
+																				node = {
+																					id = "1434",
+																					class = "Sequence",
+																					properties = {},
+																					attachments = {},
+																					children = {
+																						{
+																							node = {
+																								id = "1435",
+																								class = "Or",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "1433",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "Equal"
+																												},
+																												{
+																													Opl = {
+																														field = "tCurrentTactics"
+																													}
+																												},
+																												{
+																													Opr = {
+																														const = "DPS"
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "1436",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "GreaterEqual"
+																												},
+																												{
+																													Opl = {
+																														func = "getSp",
+																														params = {
+																															{
+																																field = "selfId"
+																															}
+																														}
+																													}
+																												},
+																												{
+																													Opr = {
+																														const = 200
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "1431",
+																								class = "IfElse",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "1437",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "LessEqual"
+																												},
+																												{
+																													Opl = {
+																														field = "CurrentDistToTarget"
+																													}
+																												},
+																												{
+																													Opr = {
+																														const = 15
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "1425",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1426",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getSp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 100
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1428",
+																														class = "Assignment",
+																														properties = {
+																															{
+																																CastRight = "false"
+																															},
+																															{
+																																Opl = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr = {
+																																	func = "getUltimateSkillId"
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1427",
+																														class = "Action",
+																														properties = {
+																															{
+																																Method = {
+																																	func = "castSkill",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			field = "skillId"
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = true
+																																		},
+																																		{
+																																			const = BaseEnum.CastAbilitySourceType.Normal
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																ResultOption = "BT_INVALID"
+																															},
+																															{
+																																ResultResumeOption = "BT_ResumeSelf"
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1432",
+																														class = "Compute",
+																														properties = {
+																															{
+																																Operator = "Add"
+																															},
+																															{
+																																Opl = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr1 = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr2 = {
+																																	const = 1
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1424",
+																														class = "Action",
+																														properties = {
+																															{
+																																Method = {
+																																	func = "castSkill",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			field = "skillId"
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = true
+																																		},
+																																		{
+																																			const = BaseEnum.CastAbilitySourceType.Normal
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																ResultOption = "BT_INVALID"
+																															},
+																															{
+																																ResultResumeOption = "BT_ResumeSelf"
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												}
+																											}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "1443",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1444",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getSp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 100
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1439",
+																														class = "Action",
+																														properties = {
+																															{
+																																Method = {
+																																	func = "moveToTarget",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			const = 15
+																																		},
+																																		{
+																																			const = 5
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = true
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = BaseEnum.MoveUpdateLevel.Normal
+																																		},
+																																		{
+																																			const = BaseEnum.PathFindType.Voxel
+																																		},
+																																		{
+																																			const = BaseEnum.SpeedRateType.Mid
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = false
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																ResultOption = "BT_INVALID"
+																															},
+																															{
+																																ResultResumeOption = "BT_ResumeTree"
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1441",
+																														class = "Assignment",
+																														properties = {
+																															{
+																																CastRight = "false"
+																															},
+																															{
+																																Opl = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr = {
+																																	func = "getUltimateSkillId"
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1440",
+																														class = "Action",
+																														properties = {
+																															{
+																																Method = {
+																																	func = "castSkill",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			field = "skillId"
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = true
+																																		},
+																																		{
+																																			const = BaseEnum.CastAbilitySourceType.Normal
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																ResultOption = "BT_INVALID"
+																															},
+																															{
+																																ResultResumeOption = "BT_ResumeSelf"
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1442",
+																														class = "Compute",
+																														properties = {
+																															{
+																																Operator = "Add"
+																															},
+																															{
+																																Opl = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr1 = {
+																																	field = "skillId"
+																																}
+																															},
+																															{
+																																Opr2 = {
+																																	const = 1
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1438",
+																														class = "Action",
+																														properties = {
+																															{
+																																Method = {
+																																	func = "castSkill",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			field = "skillId"
+																																		},
+																																		{
+																																			const = false
+																																		},
+																																		{
+																																			const = 0
+																																		},
+																																		{
+																																			const = true
+																																		},
+																																		{
+																																			const = BaseEnum.CastAbilitySourceType.Normal
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																ResultOption = "BT_INVALID"
+																															},
+																															{
+																																ResultResumeOption = "BT_ResumeSelf"
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "1475",
+																					class = "Sequence",
+																					properties = {},
+																					attachments = {},
+																					children = {
+																						{
+																							node = {
+																								id = "1473",
+																								class = "Condition",
+																								properties = {
+																									{
+																										Operator = "GreaterEqual"
+																									},
+																									{
+																										Opl = {
+																											func = "getBreakPercent",
+																											params = {
+																												{
+																													field = "tgt"
+																												}
+																											}
+																										}
+																									},
+																									{
+																										Opr = {
+																											const = 0.2
+																										}
+																									}
+																								},
+																								attachments = {},
+																								children = {}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "1476",
+																								class = "Selector",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "1445",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1447",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "Less"
+																															},
+																															{
+																																Opl = {
+																																	func = "getTargetBuffLayerCount",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			const = 10079
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 10
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1458",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getEp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 20
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1457",
+																														class = "Sequence",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "1451",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillId"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 12830100
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1455",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "maxSkillDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getMaxSkillDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1454",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillStopDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getSkillStopBoxDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1452",
+																																	class = "IfElse",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "1456",
+																																				class = "Condition",
+																																				properties = {
+																																					{
+																																						Operator = "GreaterEqual"
+																																					},
+																																					{
+																																						Opl = {
+																																							field = "CurrentDistToTarget"
+																																						}
+																																					},
+																																					{
+																																						Opr = {
+																																							field = "maxSkillDist"
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1453",
+																																				class = "Sequence",
+																																				properties = {},
+																																				attachments = {},
+																																				children = {
+																																					{
+																																						node = {
+																																							id = "1450",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "moveToTarget",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillStopDist"
+																																											},
+																																											{
+																																												const = 5
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = BaseEnum.MoveUpdateLevel.Normal
+																																											},
+																																											{
+																																												const = BaseEnum.PathFindType.Voxel
+																																											},
+																																											{
+																																												const = BaseEnum.SpeedRateType.Mid
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = false
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeTree"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					},
+																																					{
+																																						node = {
+																																							id = "1448",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "castSkill",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillId"
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = BaseEnum.CastAbilitySourceType.Normal
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeSelf"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1449",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "castSkill",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "skillId"
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = BaseEnum.CastAbilitySourceType.Normal
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "1470",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1459",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getTargetBuffLayerCount",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			const = 10079
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 10
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1472",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getEp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 20
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1469",
+																														class = "Sequence",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "1464",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillId"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 12830200
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1460",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "maxSkillDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getMaxSkillDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1461",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillStopDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getSkillStopBoxDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1463",
+																																	class = "IfElse",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "1468",
+																																				class = "Condition",
+																																				properties = {
+																																					{
+																																						Operator = "GreaterEqual"
+																																					},
+																																					{
+																																						Opl = {
+																																							field = "CurrentDistToTarget"
+																																						}
+																																					},
+																																					{
+																																						Opr = {
+																																							field = "maxSkillDist"
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1462",
+																																				class = "Sequence",
+																																				properties = {},
+																																				attachments = {},
+																																				children = {
+																																					{
+																																						node = {
+																																							id = "1465",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "moveToTarget",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillStopDist"
+																																											},
+																																											{
+																																												const = 5
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = BaseEnum.MoveUpdateLevel.Normal
+																																											},
+																																											{
+																																												const = BaseEnum.PathFindType.Voxel
+																																											},
+																																											{
+																																												const = BaseEnum.SpeedRateType.Mid
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = false
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeTree"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					},
+																																					{
+																																						node = {
+																																							id = "1467",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "castSkill",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillId"
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = BaseEnum.CastAbilitySourceType.Normal
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeSelf"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1466",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "castSkill",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "skillId"
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = BaseEnum.CastAbilitySourceType.Normal
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "1505",
+																					class = "Sequence",
+																					properties = {},
+																					attachments = {},
+																					children = {
+																						{
+																							node = {
+																								id = "1501",
+																								class = "Condition",
+																								properties = {
+																									{
+																										Operator = "Less"
+																									},
+																									{
+																										Opl = {
+																											func = "getBreakPercent",
+																											params = {
+																												{
+																													field = "tgt"
+																												}
+																											}
+																										}
+																									},
+																									{
+																										Opr = {
+																											const = 0.2
+																										}
+																									}
+																								},
+																								attachments = {},
+																								children = {}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "1502",
+																								class = "Selector",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "1504",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1486",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "Less"
+																															},
+																															{
+																																Opl = {
+																																	func = "getTargetBuffLayerCount",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			const = 10079
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 10
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1492",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getEp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 60
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1494",
+																														class = "Sequence",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "1481",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillId"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 12830100
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1477",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "maxSkillDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getMaxSkillDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1478",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillStopDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getSkillStopBoxDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1480",
+																																	class = "IfElse",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "1485",
+																																				class = "Condition",
+																																				properties = {
+																																					{
+																																						Operator = "GreaterEqual"
+																																					},
+																																					{
+																																						Opl = {
+																																							field = "CurrentDistToTarget"
+																																						}
+																																					},
+																																					{
+																																						Opr = {
+																																							field = "maxSkillDist"
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1479",
+																																				class = "Sequence",
+																																				properties = {},
+																																				attachments = {},
+																																				children = {
+																																					{
+																																						node = {
+																																							id = "1482",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "moveToTarget",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillStopDist"
+																																											},
+																																											{
+																																												const = 5
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = BaseEnum.MoveUpdateLevel.Normal
+																																											},
+																																											{
+																																												const = BaseEnum.PathFindType.Voxel
+																																											},
+																																											{
+																																												const = BaseEnum.SpeedRateType.Mid
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = false
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeTree"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					},
+																																					{
+																																						node = {
+																																							id = "1484",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "castSkill",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillId"
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = BaseEnum.CastAbilitySourceType.Normal
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeSelf"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1483",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "castSkill",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "skillId"
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = BaseEnum.CastAbilitySourceType.Normal
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "1503",
+																											class = "Sequence",
+																											properties = {},
+																											attachments = {},
+																											children = {
+																												{
+																													node = {
+																														id = "1491",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getTargetBuffLayerCount",
+																																	params = {
+																																		{
+																																			field = "tgt"
+																																		},
+																																		{
+																																			const = 10079
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 10
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1500",
+																														class = "Condition",
+																														properties = {
+																															{
+																																Operator = "GreaterEqual"
+																															},
+																															{
+																																Opl = {
+																																	func = "getEp",
+																																	params = {
+																																		{
+																																			field = "selfId"
+																																		}
+																																	}
+																																}
+																															},
+																															{
+																																Opr = {
+																																	const = 60
+																																}
+																															}
+																														},
+																														attachments = {},
+																														children = {}
+																													}
+																												},
+																												{
+																													node = {
+																														id = "1499",
+																														class = "Sequence",
+																														properties = {},
+																														attachments = {},
+																														children = {
+																															{
+																																node = {
+																																	id = "1488",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillId"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				const = 12830200
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1490",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "maxSkillDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getMaxSkillDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1489",
+																																	class = "Assignment",
+																																	properties = {
+																																		{
+																																			CastRight = "false"
+																																		},
+																																		{
+																																			Opl = {
+																																				field = "skillStopDist"
+																																			}
+																																		},
+																																		{
+																																			Opr = {
+																																				func = "getSkillStopBoxDist",
+																																				params = {
+																																					{
+																																						field = "skillId"
+																																					}
+																																				}
+																																			}
+																																		}
+																																	},
+																																	attachments = {},
+																																	children = {}
+																																}
+																															},
+																															{
+																																node = {
+																																	id = "1493",
+																																	class = "IfElse",
+																																	properties = {},
+																																	attachments = {},
+																																	children = {
+																																		{
+																																			node = {
+																																				id = "1498",
+																																				class = "Condition",
+																																				properties = {
+																																					{
+																																						Operator = "GreaterEqual"
+																																					},
+																																					{
+																																						Opl = {
+																																							field = "CurrentDistToTarget"
+																																						}
+																																					},
+																																					{
+																																						Opr = {
+																																							field = "maxSkillDist"
+																																						}
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1487",
+																																				class = "Sequence",
+																																				properties = {},
+																																				attachments = {},
+																																				children = {
+																																					{
+																																						node = {
+																																							id = "1495",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "moveToTarget",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillStopDist"
+																																											},
+																																											{
+																																												const = 5
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = BaseEnum.MoveUpdateLevel.Normal
+																																											},
+																																											{
+																																												const = BaseEnum.PathFindType.Voxel
+																																											},
+																																											{
+																																												const = BaseEnum.SpeedRateType.Mid
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = false
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeTree"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					},
+																																					{
+																																						node = {
+																																							id = "1497",
+																																							class = "Action",
+																																							properties = {
+																																								{
+																																									Method = {
+																																										func = "castSkill",
+																																										params = {
+																																											{
+																																												field = "tgt"
+																																											},
+																																											{
+																																												field = "skillId"
+																																											},
+																																											{
+																																												const = false
+																																											},
+																																											{
+																																												const = 0
+																																											},
+																																											{
+																																												const = true
+																																											},
+																																											{
+																																												const = BaseEnum.CastAbilitySourceType.Normal
+																																											}
+																																										}
+																																									}
+																																								},
+																																								{
+																																									ResultOption = "BT_INVALID"
+																																								},
+																																								{
+																																									ResultResumeOption = "BT_ResumeSelf"
+																																								}
+																																							},
+																																							attachments = {},
+																																							children = {}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		},
+																																		{
+																																			node = {
+																																				id = "1496",
+																																				class = "Action",
+																																				properties = {
+																																					{
+																																						Method = {
+																																							func = "castSkill",
+																																							params = {
+																																								{
+																																									field = "tgt"
+																																								},
+																																								{
+																																									field = "skillId"
+																																								},
+																																								{
+																																									const = false
+																																								},
+																																								{
+																																									const = 0
+																																								},
+																																								{
+																																									const = true
+																																								},
+																																								{
+																																									const = BaseEnum.CastAbilitySourceType.Normal
+																																								}
+																																							}
+																																						}
+																																					},
+																																					{
+																																						ResultOption = "BT_INVALID"
+																																					},
+																																					{
+																																						ResultResumeOption = "BT_ResumeSelf"
+																																					}
+																																				},
+																																				attachments = {},
+																																				children = {}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "758",
+																					class = "IfElse",
+																					properties = {},
+																					attachments = {},
+																					children = {
+																						{
+																							node = {
+																								id = "757",
+																								class = "Or",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "755",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "Less"
+																												},
+																												{
+																													Opl = {
+																														field = "CurrentDistToTarget"
+																													}
+																												},
+																												{
+																													Opr = {
+																														field = "minAttackDist"
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "756",
+																											class = "Condition",
+																											properties = {
+																												{
+																													Operator = "Greater"
+																												},
+																												{
+																													Opl = {
+																														field = "CurrentDistToTarget"
+																													}
+																												},
+																												{
+																													Opr = {
+																														field = "maxAttackDist"
+																													}
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "759",
+																								class = "Sequence",
+																								properties = {},
+																								attachments = {},
+																								children = {
+																									{
+																										node = {
+																											id = "760",
+																											class = "Action",
+																											properties = {
+																												{
+																													Method = {
+																														func = "moveToTarget",
+																														params = {
+																															{
+																																field = "tgt"
+																															},
+																															{
+																																field = "attackStopBoxDist"
+																															},
+																															{
+																																const = 5
+																															},
+																															{
+																																const = false
+																															},
+																															{
+																																const = false
+																															},
+																															{
+																																const = true
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = BaseEnum.MoveUpdateLevel.Normal
+																															},
+																															{
+																																const = BaseEnum.PathFindType.Voxel
+																															},
+																															{
+																																const = BaseEnum.SpeedRateType.Mid
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = false
+																															}
+																														}
+																													}
+																												},
+																												{
+																													ResultOption = "BT_INVALID"
+																												},
+																												{
+																													ResultResumeOption = "BT_ResumeTree"
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									},
+																									{
+																										node = {
+																											id = "761",
+																											class = "Action",
+																											properties = {
+																												{
+																													Method = {
+																														func = "castNormalAtkCombo",
+																														params = {
+																															{
+																																field = "tgt"
+																															},
+																															{
+																																const = 0
+																															},
+																															{
+																																const = true
+																															},
+																															{
+																																const = 2
+																															},
+																															{
+																																const = true
+																															},
+																															{
+																																const = BaseEnum.CastAbilitySourceType.Normal
+																															}
+																														}
+																													}
+																												},
+																												{
+																													ResultOption = "BT_INVALID"
+																												},
+																												{
+																													ResultResumeOption = "BT_ResumeTree"
+																												}
+																											},
+																											attachments = {},
+																											children = {}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{
+																							node = {
+																								id = "762",
+																								class = "Action",
+																								properties = {
+																									{
+																										Method = {
+																											func = "castNormalAtkCombo",
+																											params = {
+																												{
+																													field = "tgt"
+																												},
+																												{
+																													const = 0
+																												},
+																												{
+																													const = true
+																												},
+																												{
+																													const = 2
+																												},
+																												{
+																													const = true
+																												},
+																												{
+																													const = BaseEnum.CastAbilitySourceType.Normal
+																												}
+																											}
+																										}
+																									},
+																									{
+																										ResultOption = "BT_INVALID"
+																									},
+																									{
+																										ResultResumeOption = "BT_ResumeTree"
+																									}
+																								},
+																								attachments = {
+																									{
+																										transition = false,
+																										effector = false,
+																										precondition = true,
+																										id = "356",
+																										class = "Precondition",
+																										properties = {
+																											{
+																												BinaryOperator = "And"
+																											},
+																											{
+																												Operator = "LessEqual"
+																											},
+																											{
+																												Opl = {
+																													field = "CurrentDistToTarget"
+																												}
+																											},
+																											{
+																												Opr2 = {
+																													field = "maxAttackDist"
+																												}
+																											},
+																											{
+																												Phase = "Update"
+																											}
+																										}
+																									}
+																								},
+																								children = {}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										{
+											node = {
+												id = "80",
+												class = "Selector",
+												properties = {},
+												attachments = {},
+												children = {
+													{
+														node = {
+															id = "87",
+															class = "Sequence",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "100",
+																		class = "And",
+																		properties = {},
+																		attachments = {},
+																		children = {
+																			{
+																				node = {
+																					id = "101",
+																					class = "Condition",
+																					properties = {
+																						{
+																							Operator = "Less"
+																						},
+																						{
+																							Opl = {
+																								func = "getHpPercent",
+																								params = {
+																									{
+																										const = 0
+																									}
+																								}
+																							}
+																						},
+																						{
+																							Opr = {
+																								const = 0.5
+																							}
+																						}
+																					},
+																					attachments = {},
+																					children = {}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "102",
+																					class = "Condition",
+																					properties = {
+																						{
+																							Operator = "Equal"
+																						},
+																						{
+																							Opl = {
+																								field = "tShow50PCBubble"
+																							}
+																						},
+																						{
+																							Opr = {
+																								const = false
+																							}
+																						}
+																					},
+																					attachments = {},
+																					children = {}
+																				}
+																			}
+																		}
+																	}
+																},
+																{
+																	node = {
+																		id = "93",
+																		class = "Action",
+																		properties = {
+																			{
+																				Method = {
+																					func = "showEmojiBubble",
+																					params = {
+																						{
+																							const = "Cry"
+																						},
+																						{
+																							const = 3
+																						},
+																						{
+																							const = false
+																						},
+																						{
+																							const = false
+																						}
+																					}
+																				}
+																			},
+																			{
+																				ResultOption = "BT_INVALID"
+																			},
+																			{
+																				ResultResumeOption = "BT_None"
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "92",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "true"
+																			},
+																			{
+																				Opl = {
+																					field = "tShow50PCBubble"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = true
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																}
+															}
+														}
+													},
+													{
+														node = {
+															id = "88",
+															class = "Sequence",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "94",
+																		class = "Condition",
+																		properties = {
+																			{
+																				Operator = "GreaterEqual"
+																			},
+																			{
+																				Opl = {
+																					func = "getHpPercent",
+																					params = {
+																						{
+																							const = 0
+																						}
+																					}
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0.5
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "95",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "true"
+																			},
+																			{
+																				Opl = {
+																					field = "tShow50PCBubble"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = false
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																}
+															}
+														}
+													},
+													{
+														node = {
+															id = "89",
+															class = "Sequence",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "103",
+																		class = "And",
+																		properties = {},
+																		attachments = {},
+																		children = {
+																			{
+																				node = {
+																					id = "104",
+																					class = "Condition",
+																					properties = {
+																						{
+																							Operator = "Less"
+																						},
+																						{
+																							Opl = {
+																								func = "getHpPercent",
+																								params = {
+																									{
+																										const = 0
+																									}
+																								}
+																							}
+																						},
+																						{
+																							Opr = {
+																								const = 0.2
+																							}
+																						}
+																					},
+																					attachments = {},
+																					children = {}
+																				}
+																			},
+																			{
+																				node = {
+																					id = "105",
+																					class = "Condition",
+																					properties = {
+																						{
+																							Operator = "Equal"
+																						},
+																						{
+																							Opl = {
+																								field = "tShow20PCBubble"
+																							}
+																						},
+																						{
+																							Opr = {
+																								const = false
+																							}
+																						}
+																					},
+																					attachments = {},
+																					children = {}
+																				}
+																			}
+																		}
+																	}
+																},
+																{
+																	node = {
+																		id = "96",
+																		class = "Action",
+																		properties = {
+																			{
+																				Method = {
+																					func = "showEmojiBubble",
+																					params = {
+																						{
+																							const = "Cry"
+																						},
+																						{
+																							const = 3
+																						},
+																						{
+																							const = false
+																						},
+																						{
+																							const = false
+																						}
+																					}
+																				}
+																			},
+																			{
+																				ResultOption = "BT_INVALID"
+																			},
+																			{
+																				ResultResumeOption = "BT_None"
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "97",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "true"
+																			},
+																			{
+																				Opl = {
+																					field = "tShow20PCBubble"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = true
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																}
+															}
+														}
+													},
+													{
+														node = {
+															id = "90",
+															class = "Sequence",
+															properties = {},
+															attachments = {},
+															children = {
+																{
+																	node = {
+																		id = "98",
+																		class = "Condition",
+																		properties = {
+																			{
+																				Operator = "GreaterEqual"
+																			},
+																			{
+																				Opl = {
+																					func = "getHpPercent",
+																					params = {
+																						{
+																							const = 0
+																						}
+																					}
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = 0.2
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																},
+																{
+																	node = {
+																		id = "99",
+																		class = "Assignment",
+																		properties = {
+																			{
+																				CastRight = "true"
+																			},
+																			{
+																				Opl = {
+																					field = "tShow20PCBubble"
+																				}
+																			},
+																			{
+																				Opr = {
+																					const = false
+																				}
+																			}
+																		},
+																		attachments = {},
+																		children = {}
+																	}
+																}
+															}
+														}
+													},
+													{
+														node = {
+															id = "91",
+															class = "Noop",
+															properties = {},
+															attachments = {},
+															children = {}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+return ST_Monster_AutoCombat_NpcChallenge_20102830003

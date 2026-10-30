@@ -1,0 +1,380 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Data\\DialogueGraph\\DialogueGraph_91034338.lua
+
+return {
+	startNodeId = 1,
+	dialogueId = 91034338,
+	schema = 1,
+	nodes = {
+		[0] = {
+			kind = 6,
+			fields = {
+				retFlag = 0
+			},
+			flowIn = {
+				End = 0
+			}
+		},
+		{
+			kind = 8,
+			flowOut = {
+				Start = {
+					{
+						nodeId = 2,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 11,
+			fields = {
+				onSkipStartConnected = true,
+				modeInfo = {
+					hideTopLogo = true,
+					hideMarkShare = true,
+					hideAllUI = true,
+					disableSpaceFollow = true,
+					applyStateConflict = true,
+					pauseNearbyMonsterAI = true,
+					enhanceAmbientIntensity = true,
+					exitCatchMode = true,
+					resetAllActions = true,
+					blockEvent = true,
+					modeType = 2,
+					hideInteractionSign = true,
+					showHud = true,
+					blockCameraZoom = true,
+					toplogoComList = {
+						actionState = true,
+						vlog = true,
+						teamSpeech = true,
+						quest = true,
+						photo = true,
+						petFertility = true,
+						petExchange = true,
+						petChat = true,
+						npc = true,
+						multiPlayer = true,
+						combat = true,
+						chat = true,
+						callFriends = true,
+						bubble = true,
+						alert = true,
+						battleRoom = true
+					}
+				}
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				OnSkipStart = {
+					{
+						nodeId = 13,
+						portId = "In"
+					}
+				},
+				Out = {
+					{
+						nodeId = 3,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 24,
+			inputs = {
+				switchToPlayerVInput = true
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 4,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 2,
+			fields = {
+				portCount = 5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 5,
+						portId = "In"
+					}
+				},
+				["1"] = {
+					{
+						nodeId = 14,
+						portId = "In"
+					}
+				},
+				["4"] = {
+					{
+						nodeId = 15,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 22,
+			inputs = {
+				blendVInput = 0.5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 6,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 4,
+			fields = {
+				delayTime = 0.5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 7,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 23,
+			inputs = {
+				blendOutTimeVInput = 0.5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 8,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 2,
+			fields = {
+				portCount = 5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 9,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 4,
+			fields = {
+				delayTime = 0.5
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 10,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 6204258,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				portCount = 1,
+				skipTime = 0,
+				npcStaticId = -1,
+				npcId = 400062,
+				matchAudioDuration = true,
+				duration = 0,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 11,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 6204259,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				portCount = 1,
+				skipTime = 0,
+				npcStaticId = -1,
+				npcId = 0,
+				matchAudioDuration = true,
+				duration = 0,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 12,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 6204260,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				portCount = 1,
+				skipTime = 0,
+				npcStaticId = -1,
+				npcId = 400062,
+				matchAudioDuration = true,
+				duration = 0,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 13,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 10,
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 0,
+						portId = "End"
+					}
+				}
+			}
+		},
+		{
+			kind = 16,
+			inputs = {
+				slotParamVInput = 5160004,
+				virtualEntityTypeVInput = 2,
+				positionVInput = {
+					-923.768,
+					102.414,
+					1197.142
+				},
+				rotationVInput = {
+					0,
+					4.204,
+					0
+				}
+			},
+			fields = {
+				entityId = -616865451,
+				ignoreGravity = false
+			},
+			flowIn = {
+				In = 0
+			}
+		},
+		{
+			kind = 14,
+			inputs = {
+				targetEulerAngleVInput = {
+					0,
+					4.204,
+					0
+				},
+				targetPositionVInput = {
+					-924.765,
+					102.352,
+					1197.669
+				}
+			},
+			fields = {
+				setRotation = true,
+				setPosition = true,
+				reset = false
+			},
+			flowIn = {
+				In = 0
+			}
+		}
+	}
+}

@@ -1,0 +1,240 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Data\\DialogueGraph\\DialogueGraph_60519005.lua
+
+return {
+	schema = "v4",
+	startNodeId = 1,
+	dialogueId = 60519005,
+	nodes = {
+		[0] = {
+			kind = 6,
+			flowIn = {
+				End = true
+			}
+		},
+		{
+			kind = 8,
+			flowOut = {
+				Start = {
+					{
+						portId = "In",
+						nodeId = 2
+					}
+				}
+			}
+		},
+		{
+			kind = 18,
+			inputs = {
+				hideAllUIVInput = true,
+				blockEventVInput = true,
+				hideTopLogoVInput = true
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Out = {
+					{
+						portId = "In",
+						nodeId = 3
+					}
+				}
+			}
+		},
+		{
+			kind = 24,
+			inputs = {
+				switchToPlayerVInput = true
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Out = {
+					{
+						portId = "In",
+						nodeId = 4
+					}
+				}
+			}
+		},
+		{
+			kind = 4,
+			fields = {
+				delayTime = 0.2
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Out = {
+					{
+						portId = "In",
+						nodeId = 5
+					}
+				}
+			}
+		},
+		{
+			kind = 2,
+			fields = {
+				portCount = 4
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				["2"] = {
+					{
+						portId = "In",
+						nodeId = 6
+					}
+				},
+				["3"] = {
+					{
+						portId = "In",
+						nodeId = 10
+					}
+				}
+			}
+		},
+		{
+			kind = 13,
+			valueIn = {
+				npcIdVInput = {
+					portId = "EntityID",
+					nodeId = 12
+				}
+			},
+			fields = {
+				enableDefaultLookAt = true,
+				resetOrientation = true,
+				enableGroupLookAt = true
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Finish = {
+					{
+						portId = "In",
+						nodeId = 7
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 70002282
+			},
+			fields = {
+				duration = 2,
+				chatType = 3,
+				anim = "Idle"
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				["0"] = {
+					{
+						portId = "In",
+						nodeId = 8
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 70002283
+			},
+			fields = {
+				duration = 7,
+				chatType = 3,
+				anim = "Idle"
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				["0"] = {
+					{
+						portId = "In",
+						nodeId = 9
+					}
+				}
+			}
+		},
+		{
+			kind = 21,
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Out = {
+					{
+						portId = "End",
+						nodeId = 0
+					}
+				}
+			}
+		},
+		{
+			kind = 5,
+			inputs = {
+				playableStateVInput = "Emotion_Think_End"
+			},
+			valueIn = {
+				entityIdVInput = {
+					portId = "EntityID",
+					nodeId = 12
+				}
+			},
+			fields = {
+				templateId = 201377,
+				playAniType = 1,
+				entityType = 2
+			},
+			flowIn = {
+				In = true
+			},
+			flowOut = {
+				Finish = {
+					{
+						portId = "In",
+						nodeId = 11
+					}
+				}
+			}
+		},
+		{
+			kind = 5,
+			inputs = {
+				playableStateVInput = "Idle"
+			},
+			valueIn = {
+				entityIdVInput = {
+					portId = "EntityID",
+					nodeId = 12
+				}
+			},
+			fields = {
+				playAniType = 1
+			},
+			flowIn = {
+				In = true
+			}
+		},
+		{
+			kind = 9,
+			inputs = {
+				staticIdVInput = 59675659
+			},
+			fields = {
+				entityType = 2
+			}
+		}
+	}
+}

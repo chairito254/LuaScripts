@@ -1,0 +1,220 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\GameApp\\Quiz\\Component\\SingleQuizComponent.lua
+
+local Class = require("Core.Framework.Class")
+local SingleQuizData = require("Data.quiz_one_config_data")
+local PlayableConst = require("Common.Const.PlayableConst")
+local TimerManager = require("Core.Timer.TimerManager")
+local HotkeyConst = require("Const.HotkeyConst")
+local DialogueGraphConst = require("Const.DialogueGraphConst")
+local Const = require("Common.Const.Const")
+local SingleQuizComponent = Class.LiteClass("SingleQuizComponent")
+
+function SingleQuizComponent:ctor()
+	self.quizCutscene = nil
+	self.lastTimeline = nil
+	self.isQuizActive = false
+	self.quizCameraDialogueId = nil
+	self.activeQuizDialogueId = nil
+end
+
+function SingleQuizComponent:destroy()
+	self.isQuizActive = false
+	self.activeQuizDialogueId = nil
+
+	self:stopQuizCameraDialogue()
+end
+
+function SingleQuizComponent:cleanupQuiz()
+	self.isQuizActive = false
+
+	self:stopQuizTimeline()
+
+	if self.activeQuizDialogueId == nil then
+		self:stopQuizCameraDialogue()
+	end
+end
+
+function SingleQuizComponent:startQuizCameraDialogue(quizId)
+	local config = SingleQuizData[quizId]
+	local dialogueId = config and config.cameraDialogue
+
+	if not dialogueId or dialogueId == 0 then
+		return
+	end
+
+	if self.quizCameraDialogueId == dialogueId then
+		return
+	end
+
+	self:stopQuizCameraDialogue()
+
+	self.quizCameraDialogueId = dialogueId
+
+	pg.game.dialogue:playDialogueGraph(dialogueId, function(_, finishedId)
+		if self.quizCameraDialogueId == finishedId then
+			self.quizCameraDialogueId = nil
+		end
+	end)
+end
+
+function SingleQuizComponent:stopQuizCameraDialogue()
+	local dialogueId = self.quizCameraDialogueId
+
+	if dialogueId == nil then
+		return
+	end
+
+	if self.isQuizActive then
+		return
+	end
+
+	self.quizCameraDialogueId = nil
+
+	if pg.game.dialogue then
+		pg.game.dialogue:stopDialogueGraph(dialogueId, DialogueGraphConst.FINISHED_REASON.INTERRUPTED_CLEAR)
+	end
+end
+
+function SingleQuizComponent:playQuizDialogue(dialogueGraphId, dialogueId)
+	if not dialogueGraphId then
+		return
+	end
+
+	self.activeQuizDialogueId = dialogueGraphId
+
+	local variables
+
+	if dialogueId ~= nil then
+		variables = {
+			dialogueId = dialogueId
+		}
+	end
+
+	pg.game.dialogue:playDialogueGraph(dialogueGraphId, function(_, finishedId)
+		if self.activeQuizDialogueId ~= finishedId then
+			return
+		end
+
+		self.activeQuizDialogueId = nil
+
+		self:stopQuizCameraDialogue()
+	end, variables)
+end
+
+function SingleQuizComponent:startDialog(quizId, success)
+	if not SingleQuizData[quizId] then
+		return
+	end
+
+	local dialogueId = success and SingleQuizData[quizId].successDialogue or SingleQuizData[quizId].failDialogue
+
+	if not dialogueId then
+		return
+	end
+
+	self.activeQuizDialogueId = dialogueId
+
+	pg.game.communication:startNpcDialog(dialogueId, nil, {
+		callback = function()
+			self.activeQuizDialogueId = nil
+
+			self:stopQuizCameraDialogue()
+		end
+	})
+end
+
+function SingleQuizComponent:playPlayerSettleAnim(quizId, isRight)
+	if not SingleQuizData[quizId] then
+		return
+	end
+
+	local function getRandomState(right)
+		local states = right and SingleQuizData[quizId].stateRight or SingleQuizData[quizId].stateWrong
+
+		if not states or #states <= 0 then
+			return nil
+		end
+
+		return states[math.random(#states)]
+	end
+
+	local anim = getRandomState(isRight)
+
+	if not anim then
+		return
+	end
+
+	TimerManager.addTimer(0.5, function()
+		if #anim <= 3 then
+			pg.me:playCfgAnimation({
+				anim[1],
+				anim[2],
+				anim[3],
+				{
+					true
+				}
+			})
+		else
+			pg.me:playCfgAnimation(anim)
+		end
+	end)
+	pg.me.eModel:RegisterSleEndCallback(Const.COMPONENT_IDX_PLAYABLE, function()
+		pg.me:stopLayerAnimation(PlayableConst.AnimationLayer.LAYER_FULLBODY, 0.2)
+		pg.me:playAnimation(PlayableConst.Idle)
+	end)
+end
+
+function SingleQuizComponent:playQuizTimeline(quizId)
+	if not SingleQuizData[quizId] then
+		return
+	end
+
+	local tl = SingleQuizData[quizId].timeline
+
+	if not tl or type(tl) ~= "table" or #tl <= 0 then
+		return
+	end
+
+	local function getRandomTimeline()
+		if #tl == 1 then
+			self.lastTimeline = tl[1]
+
+			return self.lastTimeline
+		end
+
+		local newTimeline
+
+		repeat
+			newTimeline = tl[math.random(#tl)]
+		until newTimeline ~= self.lastTimeline
+
+		self.lastTimeline = newTimeline
+
+		return newTimeline
+	end
+
+	local player = pg.me
+	local extraData = {}
+
+	function extraData.endCallback(cutsceneItem)
+		return
+	end
+
+	function extraData.eventCallback(cutsceneItem, eventName)
+		return
+	end
+
+	local timeline = getRandomTimeline()
+
+	self.quizCutscene = pg.game.cutscene:playCutscene("quizTimeline", timeline, player:getPosition(), player:getRotation(), nil, nil, extraData)
+end
+
+function SingleQuizComponent:stopQuizTimeline()
+	if self.quizCutscene then
+		pg.game.cutscene:stopCutscene(self.quizCutscene.id)
+
+		self.quizCutscene = nil
+	end
+end
+
+return SingleQuizComponent

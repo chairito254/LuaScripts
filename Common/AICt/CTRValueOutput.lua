@@ -1,0 +1,12 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Common\\AICt\\CTRValueOutput.lua
+
+local Class = require("Core.Framework.Class")
+local CTRValueOutput = Class.LightClass("CTRValueOutput")
+
+function CTRValueOutput:ctor(name, nodeId, getter)
+	self.name = name
+	self.nodeId = nodeId
+	self.getter = getter
+end
+
+return CTRValueOutput

@@ -1,0 +1,87 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Guis\\Panels\\BattlePass\\BattlePassView.lua
+
+local logger = require("Core.Log.LoggerManager").getLogger("BattlePassView")
+local Class = require("Core.Framework.Class")
+local UIView = require("Guis.UIView")
+local LuaUIUtils = require("Utils.LuaUIUtils")
+local BattlePassView = Class.LightClass("BattlePassView", UIView)
+
+function BattlePassView:findObjects()
+	self.battlePassTransform = LuaUIUtils.getBattlePassSeasonTransform(self.transform)
+
+	if not self.battlePassTransform then
+		return
+	end
+
+	local objectReference = self.battlePassTransform:GetComponent("ObjectReference")
+
+	self.rootUComponent = objectReference:GetRefValue("rootUComponent")
+	self.btnBP = objectReference:GetRefValue("btnBP")
+	self.btnMonthCard = objectReference:GetRefValue("btnMonthCard")
+	self.monthlyCardObj = objectReference:GetRefValue("monthlyCardObj")
+	self.listBPType = objectReference:GetRefValue("listBPType")
+	self.txtNewLv = objectReference:GetRefValue("txtNewLv")
+	self.txtLvUp = objectReference:GetRefValue("txtLvUp")
+	self.txtBPName = objectReference:GetRefValue("txtBPName")
+	self.txtTimeTitle = objectReference:GetRefValue("txtTimeTitle")
+	self.countDown = objectReference:GetRefValue("countDown")
+	self.txtRule = objectReference:GetRefValue("txtRule")
+	self.btnInfo = objectReference:GetRefValue("btnInfo")
+	self.txtLvExp = objectReference:GetRefValue("txtLvExp")
+	self.progressLv = objectReference:GetRefValue("progressLv")
+	self.txtExpLimit = objectReference:GetRefValue("txtExpLimit")
+	self.btnBuy = objectReference:GetRefValue("btnBuy")
+	self.txtBtnBuy = objectReference:GetRefValue("txtBtnBuy")
+	self.txtBtnLvMax = objectReference:GetRefValue("txtBtnLvMax")
+	self.txtBPNormalName = objectReference:GetRefValue("txtBPNormalName")
+	self.txtBPAdvancedName = objectReference:GetRefValue("txtBPAdvancedName")
+	self.lockUWidget = objectReference:GetRefValue("lockUWidget")
+	self.listUList = objectReference:GetRefValue("listUList")
+	self.tabTaskWeek = objectReference:GetRefValue("tabTaskWeek")
+	self.tabTaskSeason = objectReference:GetRefValue("tabTaskSeason")
+	self.listTask = objectReference:GetRefValue("listTask")
+	self.txtLvMax = objectReference:GetRefValue("txtLvMax")
+	self.levelUpUWidget = objectReference:GetRefValue("levelUpUWidget")
+	self.btnGift = objectReference:GetRefValue("btnGift")
+	self.btnBack = objectReference:GetRefValue("btnBack")
+	self.txtTaskWeek = objectReference:GetRefValue("txtTaskWeek")
+	self.txtTaskSeason = objectReference:GetRefValue("txtTaskSeason")
+	self.btnLeftUButton = objectReference:GetRefValue("btnLeftUButton")
+	self.itemObjectReference = objectReference:GetRefValue("itemObjectReference")
+	self.btnUp = objectReference:GetRefValue("btnUp")
+	self.txtCurLv = objectReference:GetRefValue("txtCurLv")
+	self.txtNameBuy = objectReference:GetRefValue("txtNameBuy")
+	self.btnExchange = objectReference:GetRefValue("btnExchange")
+	self.btnAllGet = objectReference:GetRefValue("btnAllGet")
+	self.titleName = objectReference:GetRefValue("titleName")
+	self.btnBuyBP = objectReference:GetRefValue("btnBuyBP")
+	self.friendUIUComponent = objectReference:GetRefValue("friendUIUComponent")
+	self.txtGetAllTask = objectReference:GetRefValue("txtGetAllTask")
+	self.bgUWidget = objectReference:GetRefValue("bgUWidget")
+	self.maskRayBoxTrans = objectReference:GetRefValue("maskRayBoxTrans")
+	self.txtExchange = objectReference:GetRefValue("txtExchange")
+	self.eXPUWidget = objectReference:GetRefValue("eXPUWidget")
+	self.textVXUSDFText = objectReference:GetRefValue("textVXUSDFText")
+	self.moneyListUButton = objectReference:GetRefValue("moneyListUButton")
+	self.changeListBtnHotKeyContent = objectReference:GetRefValue("changeListBtnHotKeyContent")
+	self.txtExchangeGo = objectReference:GetRefValue("txtExchangeGo")
+	self.buttonSkipUButton = objectReference:GetRefValue("buttonSkipUButton")
+	self.currencyItemUButton = objectReference:GetRefValue("currencyItemUButton")
+	self.loopRewardTitleTxt = objectReference:GetRefValue("loopRewardTitleTxt")
+	self.loopRewardDescTxt = objectReference:GetRefValue("loopRewardDescTxt")
+	self.buttonLeftUButton = objectReference:GetRefValue("buttonLeftUButton")
+	self.buttonRightUButton = objectReference:GetRefValue("buttonRightUButton")
+	self.changeListBtn = objectReference:GetRefValue("changeListBtn")
+	self.upArrowWeek = objectReference:GetRefValue("upArrowWeek")
+	self.upArrowSeason = objectReference:GetRefValue("upArrowSeason")
+end
+
+function BattlePassView:registerObjects()
+	return
+end
+
+function BattlePassView:initView()
+	return
+end
+
+return BattlePassView

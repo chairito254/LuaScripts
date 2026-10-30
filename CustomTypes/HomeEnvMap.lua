@@ -1,0 +1,9 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\CustomTypes\\HomeEnvMap.lua
+
+local CustomDict = require("Core.PropertySync.CustomDict")
+local class = require("Core.Framework.Class")
+local Const = require("Common.Const.Const")
+local HomeLandUtils = require("Common.Utils.HomeLandUtils")
+local HomeEnvMap = class.LiteClass("HomeEnvMap", CustomDict)
+
+return HomeEnvMap

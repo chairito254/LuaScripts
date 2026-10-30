@@ -1,0 +1,342 @@
+﻿-- chunkname: @E:\\dev\\jkroot\\ws\\workspace\\WinPublish\\proj\\p4dir\\client\\LuaScripts\\Data\\DialogueGraph\\DialogueGraph_91307881.lua
+
+return {
+	schema = 1,
+	startNodeId = 1,
+	dialogueId = 91307881,
+	nodes = {
+		[0] = {
+			kind = 6,
+			fields = {
+				retFlag = 0
+			},
+			flowIn = {
+				End = 0
+			}
+		},
+		{
+			kind = 8,
+			flowOut = {
+				Start = {
+					{
+						nodeId = 2,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 11,
+			fields = {
+				modeInfo = {
+					hideTopLogo = true,
+					hideMarkShare = true,
+					hideInteractionSign = true,
+					showHud = true,
+					hideAllUI = true,
+					disableSpaceFollow = true,
+					applyStateConflict = true,
+					pauseNearbyMonsterAI = true,
+					enhanceAmbientIntensity = true,
+					exitCatchMode = true,
+					resetAllActions = true,
+					blockEvent = true,
+					modeType = 2,
+					blockCameraZoom = true,
+					toplogoComList = {
+						actionState = true,
+						vlog = true,
+						teamSpeech = true,
+						quest = true,
+						photo = true,
+						petFertility = true,
+						petExchange = true,
+						petChat = true,
+						npc = true,
+						multiPlayer = true,
+						combat = true,
+						chat = true,
+						callFriends = true,
+						bubble = true,
+						alert = true
+					}
+				}
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 3,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 2,
+			fields = {
+				portCount = 2
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 11,
+						portId = "In"
+					}
+				},
+				["1"] = {
+					{
+						nodeId = 4,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 1061105,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				duration = 4,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2,
+				anim = "Hit_H",
+				skipTime = 0,
+				npcStaticId = 91305192,
+				npcId = 0,
+				matchAudioDuration = true,
+				portCount = 1,
+				animCfg = {
+					[1] = "Hit_H",
+					[2] = {
+						[1] = true,
+						[2] = 0
+					}
+				}
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 5,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 1061106,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				duration = 3.38,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2,
+				anim = "Hit_H",
+				skipTime = 0,
+				npcStaticId = 91305196,
+				npcId = 0,
+				matchAudioDuration = true,
+				portCount = 1,
+				animCfg = {
+					[1] = "Hit_H",
+					[2] = {
+						[1] = true,
+						[2] = 0
+					}
+				}
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 6,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 1061107,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				duration = 2,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2,
+				anim = "Behav_Angry",
+				skipTime = 0,
+				npcStaticId = 91305192,
+				npcId = 0,
+				matchAudioDuration = true,
+				portCount = 1,
+				animCfg = {
+					[1] = "Behav_Angry",
+					[2] = {
+						[1] = true,
+						[2] = 0
+					}
+				}
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 7,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 1,
+			inputs = {
+				dialogueIdVInput = 1061108,
+				dialogsetCameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				}
+			},
+			fields = {
+				duration = 2,
+				disableCamera = false,
+				chatType = 3,
+				blackScreenPlayType = 0,
+				blackScreenIntervalTime = 2,
+				skipTime = 0,
+				npcStaticId = -1,
+				npcId = -1,
+				matchAudioDuration = true,
+				portCount = 1
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				["0"] = {
+					{
+						nodeId = 8,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 7,
+			fields = {
+				dialogueId = 1061109
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 9,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 12,
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 10,
+						portId = "In"
+					}
+				}
+			}
+		},
+		{
+			kind = 10,
+			inputs = {
+				endSkipVInput = true
+			},
+			flowIn = {
+				In = 0
+			},
+			flowOut = {
+				Out = {
+					{
+						nodeId = 0,
+						portId = "End"
+					}
+				}
+			}
+		},
+		{
+			kind = 3,
+			inputs = {
+				cameraMovementAxisVInput = {
+					0,
+					1,
+					0
+				},
+				positionVInput = {
+					-1282.74,
+					174.391,
+					-59.009
+				},
+				rotationVInput = {
+					17.758,
+					293.953,
+					0
+				}
+			},
+			fields = {
+				focalDistance = 200,
+				fStop = 4,
+				cameraId = 91310425,
+				visualizeDOF = false,
+				squeezeFactor = 1,
+				sensorWidth = 360,
+				recombineQuality = 0,
+				openDof = false
+			},
+			flowIn = {
+				In = 0
+			}
+		}
+	}
+}
